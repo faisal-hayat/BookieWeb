@@ -8,5 +8,6 @@ namespace BookieWeb.Models
         
         }
         // This is where we will be adding the 
+        public DbSet<Category> Categories { get; set; }
     }
 }
