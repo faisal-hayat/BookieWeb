@@ -1,0 +1,39 @@
+﻿@model List<Category>
+
+@{
+}
+
+
+<div class="">
+    <h1 class="fw-bold text-black">List of Categories</h1>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <!-- head of the table -->
+        <tr>
+            <!-- Adding header column for the table -->
+            <th>
+                Category Name
+            </th>
+            <th>
+                Display Order
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Adding for loop to iterate over the list elements -->
+        @foreach(var obj in Model.OrderBy(u => u.DisplayOrders))
+        {
+            <!-- body of the table -->
+            <tr>
+                <td>
+                    @obj.Name
+                </td>
+                <td>
+                    @obj.DisplayOrders
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

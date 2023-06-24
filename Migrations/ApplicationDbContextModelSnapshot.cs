@@ -29,6 +29,9 @@ namespace BookieWeb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("DisplayOrders")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -36,6 +39,26 @@ namespace BookieWeb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DisplayOrders = 1,
+                            Name = "Action"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DisplayOrders = 2,
+                            Name = "History"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DisplayOrders = 2,
+                            Name = "History"
+                        });
                 });
 #pragma warning restore 612, 618
         }

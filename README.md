@@ -84,6 +84,40 @@ Update-database
 
 --- ---
 
+## Add data to tables using program
+
+- Addin following lines of code to add the data
+
+```C#
+using BookieWeb.Models;
+using Microsoft.EntityFrameworkCore;
+
+
+namespace BookieWeb.Models
+{
+    public class ApplicationDbContext: DbContext
+    {
+        public ApplicationDbContext(DbContextOptions options): base(options) { 
+        
+        }
+        // This is where we will be adding the 
+        public DbSet<Category> Categories { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>().HasData(
+                new Category { Id = 1, Name = "Action", DisplayOrders = 1 },
+                new Category { Id = 2, Name = "History", DisplayOrders = 2 },
+                new Category { Id = 3, Name = "History", DisplayOrders = 2 }
+                ); 
+        }
+    }
+}
+
+```
+
+--- ---
+
 ## Routing in ASP.Net Core
 
 - Routnig follows the following Rules
@@ -95,5 +129,61 @@ pattern: "{controller=Home}/{action=Index}/{id?}");
 - controller/action/id
 
 ![alt text](Images/mvc.png)
+
+--- ---
+
+## Add Model in Views
+
+- In contropller informatino is given to **_View_** as follows
+
+```C#
+public IActionResult Index()
+{
+    //  Get list items from the database
+    List<Category> objCategoryList = _db.Categories.ToList();
+    // Default View if no view is provided
+    return View(objCategoryList);
+}
+```
+
+- - First model is added to the start of **_cshtml_** as given below
+
+```C#
+@model List<Category>
+```
+
+- Run followinh line to loop over the information that is being gievn to **_View_** as follows 
+
+```C#
+<table class="table table-bordered table-striped">
+    <thead>
+        <!-- head of the table -->
+        <tr>
+            <!-- Adding header column for the table -->
+            <th>
+                Category Name
+            </th>
+            <th>
+                Display Order
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Adding for loop to iterate over the list elements -->
+        @foreach(var obj in Model.OrderBy(u => u.DisplayOrders))
+        {
+            <!-- body of the table -->
+            <tr>
+                <td>
+                    @obj.Name
+                </td>
+                <td>
+                    @obj.DisplayOrders
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+```
 
 --- ---
