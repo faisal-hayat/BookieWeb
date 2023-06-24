@@ -19,5 +19,11 @@ namespace BookieWeb.Controllers
             // Default View if no view is provided
             return View(objCategoryList);
         }
+
+        // Create category method
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
