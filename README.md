@@ -187,3 +187,18 @@ public IActionResult Index()
 ```
 
 --- ---
+
+## Adding partial views
+
+- Add following lines of code in **_View_** to add **_parial view_**
+
+```C#
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+```
+
+--- ---

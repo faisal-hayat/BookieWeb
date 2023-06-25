@@ -14,7 +14,7 @@ namespace BookieWeb.Models
         public string Name { get; set; }
 
         [Required]
-        [Range(1, 100)]
+        [Range(1, 100, ErrorMessage ="values must be b/w 1 and 100")]
         [DisplayName("Display Order")]
         public int DisplayOrders { get; set; }
     }

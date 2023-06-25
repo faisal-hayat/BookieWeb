@@ -30,6 +30,12 @@ namespace BookieWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Category obj)
         {
+            // custom error message
+            if (obj.Name == obj.DisplayOrders.ToString())
+            {
+                // This error meesage will be displayed when model is being validated
+                ModelState.AddModelError("name", "The display order cant match the name");
+            }
             // we will receive the Category object from the View
             if (ModelState.IsValid)
             {
@@ -37,10 +43,8 @@ namespace BookieWeb.Controllers
                 _db.SaveChanges();
                 return RedirectToAction("Index", "Category");
             }
-            else
-            {
-                return RedirectToAction("Index", "Category");
-            }
+
+            return View();
         }
     }
 }

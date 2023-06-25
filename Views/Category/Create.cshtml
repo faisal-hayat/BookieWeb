@@ -8,15 +8,22 @@
              <h2 class="text-primary">Create Category</h2>
              <hr />
          </div>
-        <div class="row mb-3">
+         <!-- This one is toast message that will be displayed -->
+         <!--
+            <div asp-validation-summary="All"></div>
+        -->
+        
+         <div class="row mb-3">
              <label>Category Name</label>
              <input class="form-control" asp-for="Name" />
+             <span class="text-danger" asp-validation-for="Name"></span>
          </div>
         
          <!-- second field -->
         <div class="row mb-3">
             <label>Display Order</label>
             <input class="form-control" asp-for="DisplayOrders" />
+            <span class="text-danger" asp-validation-for="DisplayOrders"></span>
         </div>
         
         <!-- Add an button -->
@@ -29,5 +36,13 @@
                 <button class="btn btn-outline-secondary border-2 bg-dark form-control" asp-action="Index">Go Back</button>
             </div>
         </div>
+
     </div>
 </form>
+<!-- Add partial view for validation -->
+<!-- This will help in making validation at client side -->
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
