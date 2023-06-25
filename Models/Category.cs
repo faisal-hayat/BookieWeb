@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookieWeb.Models
 {
@@ -8,8 +9,13 @@ namespace BookieWeb.Models
         public int Id { get; set; }
 
         [Required]
+        [StringLength(100, MinimumLength =5)]
+        [DisplayName("Category Name")]
         public string Name { get; set; }
 
+        [Required]
+        [Range(1, 100)]
+        [DisplayName("Display Order")]
         public int DisplayOrders { get; set; }
     }
 }

@@ -8,25 +8,25 @@
              <h2 class="text-primary">Create Category</h2>
              <hr />
          </div>
-        <div class="mb-3">
+        <div class="row mb-3">
              <label>Category Name</label>
-             <input type="text" class="form-control" />
+             <input class="form-control" asp-for="Name" />
          </div>
         
          <!-- second field -->
-        <div class="mb-3">
+        <div class="row mb-3">
             <label>Display Order</label>
-            <input type="text" class="form-control" />
+            <input class="form-control" asp-for="DisplayOrders" />
         </div>
         
         <!-- Add an button -->
-        <div class="row">
-            <div class="col-6 align-items-center">
-                <button class="btn btn-primary" asp-action="">Create</button>
+        <div class="row align-items-center">
+            <div class="col-6 col-md-3">
+                <button class="btn btn-primary form-control" asp-action="Create" type="submit">Create</button>
             </div>
-            <div class="col-6 align-items-center">
+            <div class="col-6 col-md-3">
                 <!-- Add back button -->
-                <button class="btn btn-secondary border-2 bg-dark" asp-action="Index">Create</button>
+                <button class="btn btn-outline-secondary border-2 bg-dark form-control" asp-action="Index">Go Back</button>
             </div>
         </div>
     </div>
