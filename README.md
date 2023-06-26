@@ -202,3 +202,39 @@ public IActionResult Index()
 ```
 
 --- ---
+
+## Adding Notifications
+
+- **_TempData_** store data, which is only available to next **_render_**
+- syntax is following
+
+```C#
+TempData["success"] = "Category has been edited successfully";
+```
+
+- **_TempData_** is retrieved in **_Notification.cshtml_** file as follows
+
+```html
+@if (TempData["success"] != null)
+{
+    <h2>@TempData["success"]</h2>
+}
+
+@if (TempData["error"] != null)
+{
+    <h2>@TempData["error"]</h2>
+}
+```
+
+- This **_Notification.csthml_** partial view will be added to the top of **_View_**
+
+```html
+<!-- partial tag will be used here to include the notifications -->
+<partial name="_Notification" />
+```
+
+--- ---
+
+
+
+--- ---
