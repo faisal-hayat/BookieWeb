@@ -46,5 +46,34 @@ namespace BookieWeb.Controllers
 
             return View();
         }
+
+        public IActionResult Edit(int id)
+        {
+            // get category object based on the id and pass it to the view to be displayed
+            if (id==0)
+            {
+                return NotFound();
+            }
+            // get the category object based on id
+            Category category = _db.Categories.Find(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return View(category);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Category obj) {
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Update(obj);
+                _db.SaveChanges();
+                // This will display the updated objects
+                return RedirectToAction("Index", "Category");
+            }
+            return View();
+        }
     }
 }

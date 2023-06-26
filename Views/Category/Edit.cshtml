@@ -1,0 +1,49 @@
+﻿@model Category
+
+<form method="post">
+    <div class="border p-3 mt-4">
+
+        <!-- first field -->
+        <div class="row pb-2">
+            <h2 class="text-primary">Edit Category</h2>
+            <hr />
+        </div>
+        <!-- This one is toast message that will be displayed -->
+        <!--
+            <div asp-validation-summary="All"></div>
+        -->
+
+        <div class="row mb-3">
+            <label>Category Name</label>
+            <input class="form-control" asp-for="Name" />
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+
+        <!-- second field -->
+        <div class="row mb-3">
+            <label>Display Order</label>
+            <input class="form-control" asp-for="DisplayOrders" />
+            <span class="text-danger" asp-validation-for="DisplayOrders"></span>
+        </div>
+
+        <!-- Add an button -->
+        <div class="row align-items-center">
+            <div class="col-6 col-md-3">
+                <!-- TODO: Add route id here -->
+                <button class="btn btn-primary form-control" asp-action="Edit" type="submit">Update</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <!-- Add back button -->
+                <button class="btn btn-outline-secondary border-2 bg-dark form-control" asp-action="Index">Go Back</button>
+            </div>
+        </div>
+
+    </div>
+</form>
+<!-- Add partial view for validation -->
+<!-- This will help in making validation at client side -->
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
