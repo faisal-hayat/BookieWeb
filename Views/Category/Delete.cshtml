@@ -1,0 +1,42 @@
+﻿@model Category
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <input hidden asp-for="Id" />
+        <!-- first field -->
+        <div class="row pb-2">
+            <h2 class="text-primary">Delete Category</h2>
+            <hr />
+        </div>
+        <!-- This one is toast message that will be displayed -->
+        <!--
+            <div asp-validation-summary="All"></div>
+        -->
+
+        <div class="row mb-3">
+            <label>Category Name</label>
+            <!-- Disable the fields -->
+            <input class="form-control" disabled asp-for="Name" />
+        </div>
+
+        <!-- second field -->
+        <div class="row mb-3">
+            <label class="p-0">Display Order</label>
+            <!-- Disable the fields -->
+            <input class="form-control" disabled asp-for="DisplayOrders" />
+        </div>
+
+        <!-- Add an button -->
+        <div class="row align-items-center">
+            <div class="col-6 col-md-3">
+                <button class="btn btn-primary form-control" asp-action="Delete" type="submit">Delete</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <!-- Add back button -->
+                <button class="btn btn-outline-secondary border-2 bg-dark form-control" asp-action="Index">Go Back</button>
+            </div>
+        </div>
+
+    </div>
+</form>
+<!-- Add partial view for validation -->

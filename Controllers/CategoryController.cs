@@ -1,5 +1,6 @@
 ﻿using BookieWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookieWeb.Controllers
 {
@@ -74,6 +75,40 @@ namespace BookieWeb.Controllers
                 return RedirectToAction("Index", "Category");
             }
             return View();
+        }
+
+        // Adding delete functionality
+        public IActionResult Delete(int Id)
+        {
+            if (Id==0)
+            {
+                return NotFound();
+            }
+            Category category = _db.Categories.Find(Id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            // This information will be displayed to the user
+            return View(category);
+        }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePOST(int? Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+            Category? category = _db.Categories.Find(Id);
+            if (Id==null)
+            {
+                return NotFound();
+            }
+            _db.Categories.Remove(category);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Category");
         }
     }
 }
