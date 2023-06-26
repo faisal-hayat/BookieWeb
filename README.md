@@ -275,3 +275,11 @@ TempData["success"] = "Category has been edited successfully";
 ```
 
 --- ---
+
+## Add New Project 
+
+- New project is added to the BookieWeb
+- New Project type is **_ASP.NET Core Web App_**
+- Set the new project as **_startup project_**
+
+--- ---
