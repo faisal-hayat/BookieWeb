@@ -233,8 +233,45 @@ TempData["success"] = "Category has been edited successfully";
 <partial name="_Notification" />
 ```
 
+- This **_partial view_** will be added to *_Layout.cshtml_**
+
+```html
+<div class="container">
+    <main role="main" class="pb-3">
+        <!-- partial tag will be used here to include the notifications -->
+        <partial name="_Notification" />
+        @RenderBody()
+    </main>
+</div>
+```
+
 --- ---
 
+## Adding **_toastr_**
+[Source](https://cdnjs.com/libraries/toastr.js/latest)
 
+```html
+@if (TempData["success"] != null)
+{
+    <!-- Add jquery too -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- Add javascript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text">
+        toastr.success('@TempData["success"]');
+    </script>
+}
+
+@if (TempData["error"] != null)
+{
+    <!-- Add jquery too -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- Add javascript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text">
+        toastr.error('@TempData["error"]');
+    </script>
+}
+```
 
 --- ---
