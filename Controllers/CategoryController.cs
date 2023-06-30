@@ -1,4 +1,5 @@
 ﻿using Bulky.DataAccess.Data;
+using Bulky.DataAccess.Repository;
 using Bulky.DataAccess.Repository.IRepository;
 using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,18 +10,18 @@ namespace BookieWeb.Controllers
     public class CategoryController : Controller
     {
         // read data using repository
-        private readonly ICategoryRepository categoryRepository;
+        private readonly CategoryRepository categoryRepository;
         // private readonly ApplicationDbContext _db;
 
-        public CategoryController(ICategoryRepository db)
+        public CategoryController(CategoryRepository db)
         {
-            _db = db;
+            categoryRepository = db;
         }
 
         public IActionResult Index()
         {
             //  Get list items from the database
-            List<Category> objCategoryList = _db.Categories.ToList();
+            List<Category> objCategoryList = categoryRepository.GetAll().ToList();
             // Default View if no view is provided
             return View(objCategoryList);
         }
@@ -44,8 +45,8 @@ namespace BookieWeb.Controllers
             // we will receive the Category object from the View
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(obj);
-                _db.SaveChanges();
+                categoryRepository.Add(obj);
+                categoryRepository.Save();
                 // Here we will be using the temp data to store information
                 TempData["success"] = "Category created successfully!";
                 return RedirectToAction("Index", "Category");
@@ -62,7 +63,7 @@ namespace BookieWeb.Controllers
                 return NotFound();
             }
             // get the category object based on id
-            Category category = _db.Categories.Find(id);
+            Category category = categoryRepository.Get(u=>u.Id==id);
             if (category == null)
             {
                 return NotFound();
@@ -75,8 +76,8 @@ namespace BookieWeb.Controllers
         public IActionResult Edit(Category obj) {
             if (ModelState.IsValid)
             {
-                _db.Categories.Update(obj);
-                _db.SaveChanges();
+                categoryRepository.Update(obj);
+                categoryRepository.Save();
                 // use temp data to store the message
                 TempData["success"] = "Category has been edited successfully";
                 // This will display the updated objects
@@ -92,7 +93,7 @@ namespace BookieWeb.Controllers
             {
                 return NotFound();
             }
-            Category category = _db.Categories.Find(Id);
+            Category category = categoryRepository.Get(u => u.Id ==Id);
             if (category == null)
             {
                 return NotFound();
@@ -109,13 +110,13 @@ namespace BookieWeb.Controllers
             {
                 return NotFound();
             }
-            Category? category = _db.Categories.Find(Id);
+            Category? category = categoryRepository.Get(u => u.Id == Id);
             if (Id==null)
             {
                 return NotFound();
             }
-            _db.Categories.Remove(category);
-            _db.SaveChanges();
+            categoryRepository.Remove(category);
+            categoryRepository.Save();
             // use temp data to store the message
             TempData["success"] = "Category has been delete successfully";
             return RedirectToAction("Index", "Category");

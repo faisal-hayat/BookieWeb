@@ -1,3 +1,4 @@
+using Bulky.DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<Bulky.DataAccess.Data.ApplicationDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+// register services
+//builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
